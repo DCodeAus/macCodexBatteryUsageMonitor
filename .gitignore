@@ -1,0 +1,11 @@
+# Generated monitoring data
+*.csv
+!examples/sample-output.csv
+
+# macOS metadata
+.DS_Store
+
+# Editor files
+*.swp
+*.swo
+*~
