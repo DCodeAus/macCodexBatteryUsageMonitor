@@ -1,0 +1,21 @@
+# ShellCheck reviews the shell scripts on every pull request, on pushes to
+# main and weekly. It catches quoting bugs and unsafe patterns (e.g. unquoted
+# variables that could split or glob, unsafe `rm` paths). GitHub's CodeQL
+# doesn't scan shell scripts, so this fills that gap.
+name: Security scan
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 21 * * 0"   # weekly, Monday 8am AEDT
+permissions:
+  contents: read
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          severity: warning
